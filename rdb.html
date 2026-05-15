@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="rdb.pageTitle">RDB (ETL) - 企业级数据集成与调度平台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="js/i18n.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .report-hero {
+      min-height: 90vh; background: linear-gradient(135deg, #0d1f3c 0%, #1F3864 40%, #1F4E79 75%, #2E75B6 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 24px 60px; position: relative; overflow: hidden;
+    }
+    .report-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px; pointer-events: none;
+    }
+    .hero-content { max-width: 1200px; width: 100%; display: flex; gap: 48px; align-items: center; }
+    .hero-text { flex: 1; text-align: left; padding-right: 24px; }
+    .hero-text .product-icon {
+      width: 80px; height: 80px; border-radius: 20px;
+      background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px; border: 2px solid rgba(255,255,255,0.2);
+    }
+    .hero-text .product-icon svg { width: 40px; height: 40px; color: #7DC4FF; }
+    .hero-text h1 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .hero-text .subtitle { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 16px; }
+    .hero-text p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+    .hero-screenshot { flex: 1; }
+    .screenshot-carousel { width: 100%; }
+    .screenshot-wrapper { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .screenshot-slide { display: none; }
+    .screenshot-slide.active { display: block; }
+    .screenshot-slide img { width: 100%; height: auto; border-radius: 12px; }
+    .screenshot-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 20px; color: #fff; text-align: left;
+    }
+    .screenshot-caption h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .screenshot-caption p { font-size: 12px; opacity: 0.8; margin: 0; }
+    .screenshot-prev, .screenshot-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s; color: #fff; z-index: 10;
+    }
+    .screenshot-prev { left: 12px; }
+    .screenshot-next { right: 12px; }
+    .screenshot-prev:hover, .screenshot-next:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.4); }
+    .screenshot-indicators { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+    .screenshot-indicator { width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%; border: none; cursor: pointer; transition: all 0.3s; }
+    .screenshot-indicator.active { background: #7DC4FF; width: 24px; border-radius: 4px; }
+    .screenshot-indicator:hover { background: rgba(255,255,255,0.5); }
+    @media (max-width: 900px) {
+      .hero-content { flex-direction: column; text-align: center; gap: 32px; }
+      .hero-text { text-align: center; padding-right: 0; }
+    }
+    .feature-section { padding: 60px 24px; }
+    .feature-section.gray { background: #f5f7fa; }
+    .feature-section .section-header { text-align: left; margin-bottom: 32px; }
+    .feature-section .section-header h2 { font-size: 24px; color: #1F3864; margin-bottom: 12px; }
+    .feature-section .section-header p { font-size: 15px; color: #5a6a7e; max-width: none; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: #fff; border-radius: 12px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(31,56,100,0.08); border: 1px solid #e8ecf0;
+      border-left: 4px solid #2eb6a4; transition: all 0.3s ease;
+    }
+    .feature-card:hover { box-shadow: 0 4px 20px rgba(46,117,182,0.15); transform: translateY(-2px); }
+    .feature-card h3 { font-size: 16px; font-weight: 600; color: #1F3864; margin-bottom: 12px; }
+    .feature-card p { font-size: 14px; color: #5a6a7e; line-height: 1.7; }
+    .feature-card ul { margin-top: 12px; padding-left: 20px; }
+    .feature-card ul li { font-size: 13px; color: #5a6a7e; margin-bottom: 8px; list-style-type: disc; }
+    .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .capability-card {
+      background: #fff; border-radius: 16px; padding: 28px;
+      box-shadow: 0 4px 16px rgba(31,56,100,0.08); border: 1px solid #e8ecf0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
+    }
+    .capability-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: linear-gradient(90deg, var(--card-color) 0%, var(--card-color-light) 100%);
+    }
+    .capability-card:hover { box-shadow: 0 12px 40px rgba(46,117,182,0.18); transform: translateY(-4px) scale(1.01); }
+    .capability-card .capability-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--card-color) 0%, var(--card-color-light) 100%);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: all 0.3s;
+    }
+    .capability-card:hover .capability-icon { transform: scale(1.1) rotate(3deg); }
+    .capability-card .capability-icon svg { width: 28px; height: 28px; color: #fff; }
+    .capability-card h3 { font-size: 17px; font-weight: 600; color: #1F3864; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .capability-card h3 .number { font-size: 12px; font-weight: 700; color: #fff; background: var(--card-color); padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+    .capability-card p { font-size: 14px; color: #5a6a7e; line-height: 1.8; margin-bottom: 16px; }
+    .capability-card .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .capability-card .tag { background: linear-gradient(135deg, rgba(var(--card-rgb),0.1) 0%, rgba(var(--card-rgb),0.05) 100%); color: var(--card-color); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+    .capability-card.flow    { --card-color:#2E75B6; --card-color-light:#4A9BD4; --card-rgb:46,117,182; }
+    .capability-card.meta    { --card-color:#2eb6a4; --card-color-light:#4DD0C4; --card-rgb:46,182,164; }
+    .capability-card.govern  { --card-color:#7B68EE; --card-color-light:#9370DB; --card-rgb:123,104,238; }
+    .capability-card.monitor { --card-color:#F59E0B; --card-color-light:#FBBF24; --card-rgb:245,158,11; }
+    .capability-card.ai      { --card-color:#EC4899; --card-color-light:#F472B6; --card-rgb:236,72,153; }
+    @media (max-width: 768px) { .capability-grid { grid-template-columns: 1fr; gap: 20px; } }
+    .scenario-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .scenario-card {
+      background: #fff; border-radius: 14px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(31,56,100,0.06); border: 1px solid #e8ecf0;
+      border-left: 4px solid transparent;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
+    }
+    .scenario-card::before {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+      width: 4px; background: linear-gradient(180deg, #2E75B6 0%, #4A9BD4 100%);
+      opacity: 0; transform: scaleY(0); transform-origin: top; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .scenario-card:hover { box-shadow: 0 8px 28px rgba(46,117,182,0.14); transform: translateY(-3px); }
+    .scenario-card:hover::before { opacity: 1; transform: scaleY(1); }
+    .scenario-card .scenario-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(46,117,182,0.1) 0%, rgba(46,117,182,0.05) 100%);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: all 0.3s;
+    }
+    .scenario-card:hover .scenario-icon { transform: scale(1.1); background: linear-gradient(135deg, rgba(46,117,182,0.15) 0%, rgba(46,117,182,0.08) 100%); }
+    .scenario-card .scenario-icon svg { width: 22px; height: 22px; color: #2E75B6; }
+    .scenario-card h4 { font-size: 15px; font-weight: 600; color: #1F3864; margin-bottom: 10px; }
+    .scenario-card p { font-size: 13px; color: #5a6a7e; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar" aria-label="主导航">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <img src="images/logo-stc-black.png" alt="STC Logo" class="nav-logo-img" />
+    </div>
+    <ul class="nav-menu">
+      <li><a href="index.html#products" data-i18n="rdb.nav.products">产品矩阵</a></li>
+      <li><a href="index.html#demo"     data-i18n="rdb.nav.demo">演示视频</a></li>
+      <li><a href="index.html#topics"   data-i18n="rdb.nav.topics">行业专题</a></li>
+      <li><a href="index.html#about"    data-i18n="rdb.nav.about">关于我们</a></li>
+      <li><a href="http://192.168.193.1/portal-web/" class="btn-nav" target="_blank" rel="noopener" data-i18n="rdb.nav.trial">立即试用</a></li>
+      <li>
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langCurrent">中文</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="lang-dropdown" role="menu">
+            <button class="lang-option active" data-lang="zh" role="menuitem"><span class="lang-flag">🇨🇳</span> 中文</button>
+            <button class="lang-option" data-lang="en" role="menuitem"><span class="lang-flag">🇬🇧</span> English</button>
+            <button class="lang-option" data-lang="fr" role="menuitem"><span class="lang-flag">🇫🇷</span> Français</button>
+            <button class="lang-option" data-lang="de" role="menuitem"><span class="lang-flag">🇩🇪</span> Deutsch</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="report-hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8h2m-2 4h2m-5-8h2m-2 4h2M7 8h2m-2 4h2"/>
+        </svg>
+      </div>
+      <h1 data-i18n="rdb.hero.h1">RDB (ETL)</h1>
+      <div class="subtitle" data-i18n="rdb.hero.subtitle">企业级数据集成与调度平台</div>
+      <p data-i18n="rdb.hero.desc">从流程配置到故障根因，可视化编排、AI 全程伴航，打造企业级数据集成的全链路解决方案</p>
+    </div>
+
+    <div class="hero-screenshot">
+      <div class="screenshot-carousel">
+        <div class="screenshot-wrapper">
+          <div class="screenshot-slide active">
+            <img src="images/rdb-workflow.png" alt="可视化流程编排" />
+            <div class="screenshot-caption">
+              <h4 data-i18n="rdb.hero.slides[0].caption">可视化流程编排</h4>
+              <p data-i18n="rdb.hero.slides[0].desc">拖拽式图形化流程配置，47类核心组件覆盖全场景</p>
+            </div>
+          </div>
+          <div class="screenshot-slide">
+            <img src="images/rdb-monitor.png" alt="流程运行监控" />
+            <div class="screenshot-caption">
+              <h4 data-i18n="rdb.hero.slides[1].caption">流程运行监控</h4>
+              <p data-i18n="rdb.hero.slides[1].desc">全面监控流程状态，支持历史补跑与无延时调度</p>
+            </div>
+          </div>
+          <div class="screenshot-slide">
+            <img src="images/rdb-lineage.png" alt="数据流血缘关系" />
+            <div class="screenshot-caption">
+              <h4 data-i18n="rdb.hero.slides[2].caption">数据流血缘关系</h4>
+              <p data-i18n="rdb.hero.slides[2].desc">SQL血缘自动解析，可视化展示数据流向</p>
+            </div>
+          </div>
+          <div class="screenshot-slide">
+            <img src="images/rdb-ai.png" alt="AI智能辅助" />
+            <div class="screenshot-caption">
+              <h4 data-i18n="rdb.hero.slides[3].caption">AI智能辅助</h4>
+              <p data-i18n="rdb.hero.slides[3].desc">交互式问答、流程解读、故障根因分析</p>
+            </div>
+          </div>
+          <button class="screenshot-prev" aria-label="上一张">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="screenshot-next" aria-label="下一张">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="screenshot-indicators">
+          <button class="screenshot-indicator active" aria-label="第1张"></button>
+          <button class="screenshot-indicator" aria-label="第2张"></button>
+          <button class="screenshot-indicator" aria-label="第3张"></button>
+          <button class="screenshot-indicator" aria-label="第4张"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 产品综述 ===== -->
+<section class="feature-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="rdb.s1.h2">一、产品综述</h2>
+      <p data-i18n="rdb.s1.p1">RDB（Report Data Bridge，报表数据桥）是一款企业级 ETL 数据集成工具，可将业务系统中分布的、异构数据源中的数据（如关系型数据、数据文件等）抽取到临时中间层后进行清洗、转换与集成，最终加载到数据仓库或数据集市中，为联机分析处理、数据挖掘及辅助决策提供统一、可靠的数据基础。同时引入 AI 智能能力，大幅提升 ETL 配置与运维效率。</p>
+    </div>
+    <p style="color:#5a6a7e; font-size:14px;" data-i18n="rdb.s1.p2">RDB 通过可视化流程编排、全面的元数据管理、数据治理能力、智能运维监控与 AI 智能辅助，为企业提供从数据接入到数据治理的全链路解决方案。</p>
+  </div>
+</section>
+
+<!-- ===== 核心能力 ===== -->
+<section class="feature-section gray">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="rdb.s2.h2">二、核心能力</h2>
+    </div>
+    <div class="capability-grid">
+
+      <div class="capability-card flow">
+        <div class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        <h3><span class="number">01</span><span data-i18n="rdb.s2.c1Title">可视化流程编排</span></h3>
+        <p data-i18n="rdb.s2.c1Desc">支持拖拽式图形化流程配置与展示，内置 47 类 ETL 核心组件，覆盖数据导入、导出、转换、传输、质量校验、实时消息对接等全类型操作，分钟级完成复杂数据处理流程的设计与发布。</p>
+        <div class="tag-list" id="c1Tags"></div>
+      </div>
+
+      <div class="capability-card meta">
+        <div class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <h3><span class="number">02</span><span data-i18n="rdb.s2.c2Title">全面的元数据管理</span></h3>
+        <p data-i18n="rdb.s2.c2Desc">提供完善的 RDB 元数据配置体系，支持 14 类对象元数据类型管理，涵盖数据库对象、表对象、SQL 脚本、存储过程、数据文件、Hadoop 相关对象、RestAPI 对象等。</p>
+        <div class="tag-list" id="c2Tags"></div>
+      </div>
+
+      <div class="capability-card govern">
+        <div class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3><span class="number">03</span><span data-i18n="rdb.s2.c3Title">数据治理能力</span></h3>
+        <p data-i18n="rdb.s2.c3Desc">内置数据血缘分析与数据质量管理双引擎，支持 SQL 血缘关系自动解析与可视化展示，以及数据一致性、波动性、有效性、完整性四维数据质量校验。</p>
+        <div class="tag-list" id="c3Tags"></div>
+      </div>
+
+      <div class="capability-card monitor">
+        <div class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/>
+          </svg>
+        </div>
+        <h3><span class="number">04</span><span data-i18n="rdb.s2.c4Title">智能运维监控</span></h3>
+        <p data-i18n="rdb.s2.c4Desc">提供全面的流程运行状态监控，支持历史任意时间范围内的流程实例补跑、无延时流程调度，以及组件报错自动重处理机制，显著降低运维干预成本。</p>
+        <div class="tag-list" id="c4Tags"></div>
+      </div>
+
+      <div class="capability-card ai">
+        <div class="capability-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h3><span class="number">05</span><span data-i18n="rdb.s2.c5Title">AI 智能辅助</span></h3>
+        <p data-i18n="rdb.s2.c5Desc">内置专属 RDB 知识库，提供交互式问答、流程配置辅助、复杂流程解读及 ETL 故障根因分析四大 AI 能力，助力配置与运维人员大幅提升工作效能。</p>
+        <div class="tag-list" id="c5Tags"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 功能特性 ===== -->
+<section class="feature-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="rdb.s3.h2">三、功能特性</h2>
+    </div>
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f1.title">3.1 WorkFlow Manager — 可视化流程管理</h3>
+        <p data-i18n="rdb.s3.f1.desc">提供图形化的 ETL 流程设计与管理能力，支持拖拽式配置、流程测试与发布、批量激活等功能。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f1.li1">拖拽式图形化流程配置与展示</li>
+          <li data-i18n="rdb.s3.f1.li2">流程的测试与发布，确保上线前充分验证</li>
+          <li data-i18n="rdb.s3.f1.li3">流程的批量激活，提升批量运维效率</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f2.title">3.2 WorkFlow Monitor — 流程运行监控</h3>
+        <p data-i18n="rdb.s3.f2.desc">提供全面的 ETL 流程运行状态监控与管理能力，支持历史补跑与无延时调度。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f2.li1">展示流程实例统计信息与实时统计</li>
+          <li data-i18n="rdb.s3.f2.li2">支持任意历史时间范围的流程实例补跑</li>
+          <li data-i18n="rdb.s3.f2.li3">支持无延时流程调度，保障实时性要求</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f3.title">3.3 Repository Management — 元数据配置管理</h3>
+        <p data-i18n="rdb.s3.f3.desc">支持 RDB 流程运行所需元数据对象的统一配置与管理，目前支持 14 类元数据对象类型。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f3.li1">DB 对象、Table 对象、SQL 对象</li>
+          <li data-i18n="rdb.s3.f3.li2">Hadoop 相关对象、RestAPI 对象</li>
+          <li data-i18n="rdb.s3.f3.li3">全面代表 RDB 的能力范围</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f4.title">3.4 RDB 核心组件库</h3>
+        <p data-i18n="rdb.s3.f4.desc">平台目前支持 47 类 ETL 核心组件，覆盖数据导入导出、文件操作、质量校验等全场景。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f4.li1">不同类型数据源的数据导入与导出</li>
+          <li data-i18n="rdb.s3.f4.li2">数据质量校验与实时消息对接</li>
+          <li data-i18n="rdb.s3.f4.li3">流程控制与机器学习组件</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f5.title">3.5 Data Governance — 数据治理</h3>
+        <p data-i18n="rdb.s3.f5.desc">包含数据血缘管理（DATA FamilyTree）与数据质量管理（DQ Management）双引擎。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f5.li1">自动解析 SQL 生成血缘关系图谱</li>
+          <li data-i18n="rdb.s3.f5.li2">数据一致性、波动性、有效性、完整性校验</li>
+          <li data-i18n="rdb.s3.f5.li3">血缘关系高亮链路可视化显示</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f6.title">3.6 Agent of Workflow — 流程权限管控</h3>
+        <p data-i18n="rdb.s3.f6.desc">实现不同用户对同一流程的增删改查权限的精细化控制，满足多人协作开发场景。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f6.li1">精细化权限控制</li>
+          <li data-i18n="rdb.s3.f6.li2">多人协作开发支持</li>
+          <li data-i18n="rdb.s3.f6.li3">流程资产安全保障</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f7.title">3.7 Exception Alarm Configuration — 异常自动重处理</h3>
+        <p data-i18n="rdb.s3.f7.desc">实现组件报错自动重处理功能，减少运维人员对常规故障的人工介入。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f7.li1">组件报错自动重处理</li>
+          <li data-i18n="rdb.s3.f7.li2">减少常规故障人工介入</li>
+          <li data-i18n="rdb.s3.f7.li3">提升系统稳定性与运维效率</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f8.title">3.8 Message Monitor — 实时消息监控</h3>
+        <p data-i18n="rdb.s3.f8.desc">提供 MQ 实时消息监控及流水查看功能，适用于实时数据同步场景。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f8.li1">MQ 实时消息监控</li>
+          <li data-i18n="rdb.s3.f8.li2">消息流水查看</li>
+          <li data-i18n="rdb.s3.f8.li3">实时数据同步场景支持</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <h3 data-i18n="rdb.s3.f9.title">3.9 AI 能力</h3>
+        <p data-i18n="rdb.s3.f9.desc">平台内置专属 RDB AI 智能体，提供四大 AI 辅助能力，助力提升工作效能。</p>
+        <ul>
+          <li data-i18n="rdb.s3.f9.li1">交互式知识问答</li>
+          <li data-i18n="rdb.s3.f9.li2">流程配置辅助与复杂流程解读</li>
+          <li data-i18n="rdb.s3.f9.li3">ETL 故障根因分析</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 适用场景 ===== -->
+<section class="feature-section gray">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="rdb.s4.h2">四、适用场景</h2>
+    </div>
+    <div class="scenario-grid">
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc1.title">4.1 多源异构数据集成</h4>
+        <p data-i18n="rdb.s4.sc1.desc">适用于将 Oracle、MySQL、HIVE、ClickHouse 等多种异构数据源统一集成至数据仓库的场景。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc2.title">4.2 数据仓库定时批量加载</h4>
+        <p data-i18n="rdb.s4.sc2.desc">适用于企业数据仓库的定时批量 ETL 任务场景，确保数据按时准确入仓。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc3.title">4.3 实时数据同步与消息处理</h4>
+        <p data-i18n="rdb.s4.sc3.desc">适用于对接 MQ 消息队列实现实时数据同步的场景，保障消息数据的可靠处理。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc4.title">4.4 数据质量监控与治理</h4>
+        <p data-i18n="rdb.s4.sc4.desc">适用于对报表数据质量有严格要求的场景，通过多维度校验保障数据可信度。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc5.title">4.5 数据血缘追溯与合规审计</h4>
+        <p data-i18n="rdb.s4.sc5.desc">适用于需要追溯数据来源与加工链路的数据治理场景，满足合规与审计要求。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc6.title">4.6 多团队协作 ETL 开发</h4>
+        <p data-i18n="rdb.s4.sc6.desc">适用于多开发人员协作维护 ETL 流程的场景，通过权限管控保障流程资产安全。</p>
+      </div>
+
+      <div class="scenario-card">
+        <div class="scenario-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+        <h4 data-i18n="rdb.s4.sc7.title">4.7 ETL 故障快速响应与修复</h4>
+        <p data-i18n="rdb.s4.sc7.desc">适用于对数据处理稳定性要求较高的生产环境，显著缩短故障平均修复时间。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-logo" data-i18n-html="rdb.footer.logo">STC 数据分析智能<span>平台</span></div>
+  <p data-i18n="rdb.footer.tagline">电信行业全链路数据智能解决方案</p>
+  <nav class="footer-links" aria-label="页脚导航">
+    <a href="index.html#products" data-i18n="rdb.footer.products">产品矩阵</a>
+    <a href="index.html#demo"     data-i18n="rdb.footer.demo">演示视频</a>
+    <a href="index.html#topics"   data-i18n="rdb.footer.topics">行业专题</a>
+    <a href="index.html#about"    data-i18n="rdb.footer.about">关于我们</a>
+    <a href="http://192.168.193.1/portal-web/" target="_blank" rel="noopener" data-i18n="rdb.footer.trialEnv">演示环境</a>
+  </nav>
+  <hr class="footer-divider" />
+  <p data-i18n="rdb.footer.copyright">©2026 国际交付中台-工程技术部-报表团队 · 专注电信行业数据价值挖掘</p>
+</footer>
+
+<script>
+// ── Navbar 滚动阴影 ──
+(function () {
+  const nb = document.querySelector('.navbar');
+  if (nb) window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 20));
+})();
+
+// ── 平滑滚动 ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+// ── Reveal 动画 ──
+(function () {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+// ── 截图轮播 ──
+(function () {
+  const carousel = document.querySelector('.screenshot-carousel');
+  if (!carousel) return;
+  const slides = carousel.querySelectorAll('.screenshot-slide');
+  const dots   = carousel.querySelectorAll('.screenshot-indicator');
+  let idx = 0;
+  function show(i) {
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+    idx = i;
+  }
+  carousel.querySelector('.screenshot-prev').addEventListener('click', () => show((idx - 1 + slides.length) % slides.length));
+  carousel.querySelector('.screenshot-next').addEventListener('click', () => show((idx + 1) % slides.length));
+  dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+  setInterval(() => show((idx + 1) % slides.length), 5000);
+})();
+
+// ── 多语言系统（RDB 专用） ──
+(function () {
+  const LANG_NAMES = { zh: '中文', en: 'English', fr: 'Français', de: 'Deutsch' };
+  const LANG_HTML  = { zh: 'zh-CN', en: 'en', fr: 'fr', de: 'de' };
+
+  function get(obj, path) {
+    const parts = path.replace(/\[(\d+)\]/g, '.$1').split('.');
+    return parts.reduce((a, k) => (a != null && a[k] !== undefined ? a[k] : null), obj);
+  }
+
+  function renderTags(id, tags) {
+    const el = document.getElementById(id);
+    if (!el || !Array.isArray(tags)) return;
+    el.innerHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
+  }
+
+  function applyRdb(lang) {
+    const T = window.RDB_TRANSLATIONS[lang];
+    if (!T) return;
+    document.title = T.pageTitle;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n').replace(/^rdb\./, '');
+      const val = get(T, key);
+      if (val !== null && val !== undefined) el.textContent = val;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html').replace(/^rdb\./, '');
+      const val = get(T, key);
+      if (val !== null && val !== undefined) el.innerHTML = val;
+    });
+    renderTags('c1Tags', T.s2.c1Tags);
+    renderTags('c2Tags', T.s2.c2Tags);
+    renderTags('c3Tags', T.s2.c3Tags);
+    renderTags('c4Tags', T.s2.c4Tags);
+    renderTags('c5Tags', T.s2.c5Tags);
+    document.documentElement.lang = LANG_HTML[lang] || lang;
+    document.documentElement.dataset.lang = lang;
+  }
+
+  function setLang(lang) {
+    applyRdb(lang);
+    localStorage.setItem('preferred-lang', lang);
+    const el = document.getElementById('langCurrent');
+    if (el) el.textContent = LANG_NAMES[lang];
+    document.querySelectorAll('.lang-option').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    closeDropdown();
+  }
+
+  function openDropdown()  { document.getElementById('langSwitcher')?.classList.add('open');    document.getElementById('langBtn')?.setAttribute('aria-expanded','true'); }
+  function closeDropdown() { document.getElementById('langSwitcher')?.classList.remove('open'); document.getElementById('langBtn')?.setAttribute('aria-expanded','false'); }
+  function toggleDropdown(){ document.getElementById('langSwitcher')?.classList.contains('open') ? closeDropdown() : openDropdown(); }
+
+  document.getElementById('langBtn').addEventListener('click', function(e) { e.stopPropagation(); toggleDropdown(); });
+  document.querySelectorAll('.lang-option').forEach(function(btn) {
+    btn.addEventListener('click', function() { setLang(btn.dataset.lang); });
+  });
+  document.addEventListener('click', function(e) {
+    if (!document.getElementById('langSwitcher').contains(e.target)) closeDropdown();
+  });
+  var supported = ['zh','en','fr','de'];
+  var saved     = localStorage.getItem('preferred-lang');
+  var browser   = navigator.language.slice(0, 2);
+  var initLang  = supported.indexOf(saved) !== -1 ? saved : supported.indexOf(browser) !== -1 ? browser : 'zh';
+  setLang(initLang);
+})();
+</script>
+</body>
+</html>
