@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">数据分析智能平台 — 电信行业数据分析解决方案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/i18n.js"></script>
+</head>
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar" aria-label="主导航">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <img src="images/logo-stc-black.png" alt="STC Logo" class="nav-logo-img" />
+    </div>
+    <ul class="nav-menu">
+      <li><a href="#products" data-i18n="nav.products">产品矩阵</a></li>
+      <li><a href="#demo" data-i18n="nav.demo">演示视频</a></li>
+      <li><a href="#topics" data-i18n="nav.topics">行业专题</a></li>
+      <li><a href="#about" data-i18n="nav.about">关于我们</a></li>
+      <li><a href="http://192.168.193.1/portal-web/" class="btn-nav" target="_blank" rel="noopener" data-i18n="nav.trial">立即试用</a></li>
+      <li>
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span id="langCurrent">中文</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown" role="menu">
+            <button class="lang-option active" data-lang="zh" role="menuitem"><span class="lang-flag">🇨🇳</span> 中文</button>
+            <button class="lang-option" data-lang="en" role="menuitem"><span class="lang-flag">🇬🇧</span> English</button>
+            <button class="lang-option" data-lang="fr" role="menuitem"><span class="lang-flag">🇫🇷</span> Français</button>
+            <button class="lang-option" data-lang="de" role="menuitem"><span class="lang-flag">🇩🇪</span> Deutsch</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="home">
+  <div class="hero-badge" data-i18n="hero.badge">电信行业数据分析解决方案</div>
+  <h1 data-i18n-html="hero.title">让数据成为<span class="highlight">业务增长</span>的核心引擎</h1>
+  <p data-i18n="hero.desc">覆盖数据集成、存储、分析、可视化、AI 智能问数全链路，为电信运营商提供一站式数据智能平台，驱动精准运营与科学决策。</p>
+  <div class="hero-btns">
+    <a href="http://192.168.193.1/portal-web/" class="btn-primary" target="_blank" rel="noopener" data-i18n="hero.cta1">立即试用</a>
+    <a href="#demo" class="btn-outline" data-i18n="hero.cta2">观看演示</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">10+</div>
+      <div class="hero-stat-label" data-i18n="hero.stat1">核心产品模块</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">47</div>
+      <div class="hero-stat-label" data-i18n="hero.stat2">ETL 组件类型</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">8</div>
+      <div class="hero-stat-label" data-i18n="hero.stat3">机器学习算法</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label" data-i18n="hero.stat4">行业深度专题</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Product Matrix ===== -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" data-i18n="products.sectionTag">产品矩阵</span>
+      <h2 data-i18n="products.sectionTitle">全链路数据分析产品体系</h2>
+      <p data-i18n="products.sectionDesc">从数据接入到智能分析，覆盖电信运营商数据全生命周期管理与价值挖掘</p>
+    </div>
+
+    <!-- Layer 1 -->
+    <div class="layer-block reveal">
+      <div class="layer-label">
+        <span class="layer-badge" data-i18n="products.layer1">数据基础层</span>
+        <div class="layer-line"></div>
+      </div>
+      <div class="cards-grid cards-grid-2">
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 7h.01M10 7h8M6 11h.01M10 11h8"/></svg>
+          </div>
+          <div class="card-title">
+            RDB (ETL)
+            <small data-i18n="products.rdb.sub">数据集成与调度平台</small>
+          </div>
+          <div class="card-desc" data-i18n="products.rdb.desc">提供 47 种可视化 ETL 组件与全链路数据集成能力，支持结构化/半结构化/实时流数据的抽取、清洗、转换与加载，内置 WorkFlow Manager 统一调度，高效驱动数据仓库持续更新。</div>
+          <a href="rdb.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+          </div>
+          <div class="card-title">
+            Data Warehouse
+            <small data-i18n="products.dwh.sub">电信行业数据仓库</small>
+          </div>
+          <div class="card-desc" data-i18n="products.dwh.desc">深度融合电信行业语义的企业级数据仓库，提供 DWINT → DWSTR → DWMID → DWCTR → DWFCT 五层标准架构，内置客户、套餐、流量等核心电信模型，支持 PB 级数据管理与历史追溯分析。</div>
+          <a href="dwh.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer 2 -->
+    <div class="layer-block reveal">
+      <div class="layer-label">
+        <span class="layer-badge" data-i18n="products.layer2">数据分析层</span>
+        <div class="layer-line"></div>
+      </div>
+      <div class="cards-grid cards-grid-2">
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
+          </div>
+          <div class="card-title">
+            Report
+            <small data-i18n="products.report.sub">企业级 BI 报表</small>
+          </div>
+          <div class="card-desc" data-i18n="products.report.desc">基于开源 BIRT 引擎深度定制，支持像素级报表设计、多数据源聚合、参数化查询与定时推送，满足电信运营分析、监管报送等复杂报表需求。</div>
+          <a href="report.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="card-title">
+            KPI
+            <small data-i18n="products.kpi.sub">指标监控与预警</small>
+          </div>
+          <div class="card-desc" data-i18n="products.kpi.desc">统一管理业务 KPI 指标体系，提供仪表盘式监控视图、同环比趋势分析与阈值告警，帮助运营团队实时掌控核心业务指标达成情况。</div>
+          <a href="kpi.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <div class="card-title">
+            Focus Analysis
+            <small data-i18n="products.focus.sub">主题 Dashboard</small>
+          </div>
+          <div class="card-desc" data-i18n="products.focus.desc">面向业务主题的可视化 Dashboard 平台，支持丰富图表类型与自由布局，提供钻取、联动、过滤等交互功能，将多维分析结果直观呈现，助力管理层快速洞察。</div>
+          <a href="dashboard.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+          </div>
+          <div class="card-title">
+            Smart Analysis
+            <small data-i18n="products.smart.sub">自助分析平台</small>
+          </div>
+          <div class="card-desc" data-i18n="products.smart.desc">赋予业务人员自助探索数据的能力，通过拖拽式操作完成多维下钻、交叉分析与自定义报表构建，无需 IT 介入，让数据分析触手可及。</div>
+          <a href="sa.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="18" cy="6" r="4"/><path d="M16.5 7.5 18 6l1.5 1.5"/></svg>
+          </div>
+          <div class="card-title">
+            Algo Label
+            <small data-i18n="products.algo.sub">机器学习标签工厂</small>
+          </div>
+          <div class="card-desc" data-i18n="products.algo.desc">内置 8 大机器学习算法（随机森林、逻辑回归、K-Means 等），提供可视化建模流程与自动特征工程，批量生成客户标签，为精准营销提供数据支撑。</div>
+          <a href="algo.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 14h5"/></svg>
+          </div>
+          <div class="card-title">
+            AI StatMind
+            <small data-i18n="products.ai.sub">智能问数 AI 助手</small>
+          </div>
+          <div class="card-desc" data-i18n="products.ai.desc">基于大语言模型构建的自然语言数据查询代理，用户通过对话即可完成数据检索、异常洞察与趋势分析，将复杂 SQL 查询转化为零门槛的智能交互体验。</div>
+          <a href="AIStatmind.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layer 3 -->
+    <div class="layer-block reveal">
+      <div class="layer-label">
+        <span class="layer-badge" data-i18n="products.layer3">数据服务层</span>
+        <div class="layer-line"></div>
+      </div>
+      <div class="cards-grid cards-grid-2">
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8M8 17h8M8 9h2"/></svg>
+          </div>
+          <div class="card-title">
+            Data Workbench
+            <small data-i18n="products.workbench.sub">数据作业平台</small>
+          </div>
+          <div class="card-desc" data-i18n="products.workbench.desc">是一款面向数据工作者的一站式数据操作与管理平台，整合 SQL 即席查询、跨源关联分析、线下数据录入、数据修正及维度数据管理五大核心功能模块。</div>
+          <a href="Workbench.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="product-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </div>
+          <div class="card-title">
+            Data Share
+            <small data-i18n="products.share.sub">数据共享与分发</small>
+          </div>
+          <div class="card-desc" data-i18n="products.share.desc">提供 FTP、邮件、API 等多通道数据分发能力，支持定时推送、按需订阅与权限管控，打通数据孤岛，实现跨部门、跨系统的数据安全共享。</div>
+          <a href="datashare.html" class="card-link" data-i18n="products.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Demo Video ===== -->
+<section class="section section-gray" id="demo">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" data-i18n="demo.sectionTag">产品演示</span>
+      <h2 data-i18n="demo.sectionTitle">按功能体验全平台能力</h2>
+      <p data-i18n="demo.sectionDesc">观看各功能模块的演示视频，深入了解数据智能平台的核心能力</p>
+    </div>
+
+    <div class="demo-carousel reveal">
+      <div class="carousel-wrapper">
+        <div class="carousel-track">
+          <div class="carousel-slide active" data-slide-index="0">
+            <div class="slide-layer-badge" data-i18n="demo.slides[0].badge">数据基础层</div>
+            <div class="video-container">
+              <video class="demo-video" poster="" controls muted playsinline>
+                <source src="videos/ETL.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[0].title">RDB (ETL)</h3>
+              <p data-i18n="demo.slides[0].sub">数据集成与调度平台</p>
+              <small data-i18n="demo.slides[0].tags">47种ETL组件 · 可视化编排 · 统一调度管理</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="1">
+            <div class="slide-layer-badge" data-i18n="demo.slides[1].badge">数据分析层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[1].title">Report 报表平台</h3>
+              <p data-i18n="demo.slides[1].sub">企业级 BI 报表</p>
+              <small data-i18n="demo.slides[1].tags">像素级设计 · 参数化查询 · 定时推送</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="2">
+            <div class="slide-layer-badge" data-i18n="demo.slides[2].badge">数据分析层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[2].title">KPI 管理</h3>
+              <p data-i18n="demo.slides[2].sub">指标监控与预警</p>
+              <small data-i18n="demo.slides[2].tags">仪表盘监控 · 趋势分析 · 阈值告警</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="3">
+            <div class="slide-layer-badge" data-i18n="demo.slides[3].badge">数据分析层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[3].title">Focus Analysis</h3>
+              <p data-i18n="demo.slides[3].sub">主题 Dashboard</p>
+              <small data-i18n="demo.slides[3].tags">多维分析 · 图表联动 · 自由布局</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="4">
+            <div class="slide-layer-badge" data-i18n="demo.slides[4].badge">数据分析层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[4].title">Smart Analysis</h3>
+              <p data-i18n="demo.slides[4].sub">自助分析平台</p>
+              <small data-i18n="demo.slides[4].tags">拖拽式操作 · 多维下钻 · 无需IT介入</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="5">
+            <div class="slide-layer-badge" data-i18n="demo.slides[5].badge">数据分析层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[5].title">Algo Label</h3>
+              <p data-i18n="demo.slides[5].sub">机器学习标签工厂</p>
+              <small data-i18n="demo.slides[5].tags">8大ML算法 · 可视化建模 · 自动特征工程</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="6">
+            <div class="slide-layer-badge" data-i18n="demo.slides[6].badge">数据服务层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[6].title">Data Workbench</h3>
+              <p data-i18n="demo.slides[6].sub">数据作业平台</p>
+              <small data-i18n="demo.slides[6].tags">SQL查询 · 跨源分析 · 数据修正</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="7">
+            <div class="slide-layer-badge" data-i18n="demo.slides[7].badge">数据服务层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[7].title">Data Share</h3>
+              <p data-i18n="demo.slides[7].sub">数据共享与分发</p>
+              <small data-i18n="demo.slides[7].tags">多通道分发 · 定时推送 · 权限管控</small>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide-index="8">
+            <div class="slide-layer-badge" data-i18n="demo.slides[8].badge">数据服务层</div>
+            <div class="video-placeholder" role="button" tabindex="0">
+              <div class="play-btn" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h3 data-i18n="demo.slides[8].title">AI StatMind</h3>
+              <p data-i18n="demo.slides[8].sub">智能问数 AI 助手</p>
+              <small data-i18n="demo.slides[8].tags">自然语言查询 · 异常洞察 · 趋势分析</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-prev" id="carouselPrev">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="carousel-next" id="carouselNext">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
+      <div class="carousel-indicators">
+        <button class="indicator active" data-slide="0"></button>
+        <button class="indicator" data-slide="1"></button>
+        <button class="indicator" data-slide="2"></button>
+        <button class="indicator" data-slide="3"></button>
+        <button class="indicator" data-slide="4"></button>
+        <button class="indicator" data-slide="5"></button>
+        <button class="indicator" data-slide="6"></button>
+        <button class="indicator" data-slide="7"></button>
+        <button class="indicator" data-slide="8"></button>
+      </div>
+
+      <div class="carousel-counter">
+        <span class="current-slide">1</span>
+        <span class="separator">/</span>
+        <span class="total-slides">9</span>
+      </div>
+    </div>
+
+    <div class="demo-cta reveal">
+      <p data-i18n="demo.ctaText">想要亲自体验？进入我们的演示环境，探索全部功能</p>
+      <a href="http://192.168.193.1/portal-web/" class="btn-primary" target="_blank" rel="noopener" data-i18n="demo.ctaBtn">进入演示环境</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Industry Topics ===== -->
+<section class="section" id="topics">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" data-i18n="topics.sectionTag">行业专题</span>
+      <h2 data-i18n="topics.sectionTitle">电信行业深度分析解决方案</h2>
+      <p data-i18n="topics.sectionDesc">基于行业实践沉淀，针对电信运营核心痛点提供开箱即用的分析专题</p>
+    </div>
+    <div class="topic-cards">
+      <div class="topic-card reveal">
+        <div class="topic-card-header">
+          <h3 data-i18n="topics.churn.title">流失预测专题</h3>
+          <p data-i18n="topics.churn.subtitle">基于机器学习的客户流失识别与挽留</p>
+        </div>
+        <div class="topic-card-body">
+          <p data-i18n="topics.churn.desc">运用随机森林等机器学习算法，对客户行为、消费、投诉、套餐等多维特征进行建模，提前识别高流失风险客户，推动精准挽留营销，有效降低客户流失率。</p>
+          <div class="topic-tags" data-i18n-tags="topics.churn.tags">
+            <span class="topic-tag">随机森林</span>
+            <span class="topic-tag">流失评分</span>
+            <span class="topic-tag">精准挽留</span>
+            <span class="topic-tag">营销自动化</span>
+          </div>
+          <a href="churn.html" class="card-link" style="margin-top: 20px;" data-i18n="topics.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-card-header">
+          <h3 data-i18n="topics.channel.title">渠道偏好专题</h3>
+          <p data-i18n="topics.channel.subtitle">客户渠道行为分析与智能触达策略</p>
+        </div>
+        <div class="topic-card-body">
+          <p data-i18n="topics.channel.desc">综合客户渠道使用频次、满意度及历史响应行为，运用熵值法与逻辑回归构建渠道偏好模型，为每位客户推荐最优触达渠道，提升营销响应率与渠道 ROI。</p>
+          <div class="topic-tags" data-i18n-tags="topics.channel.tags">
+            <span class="topic-tag">熵值法</span>
+            <span class="topic-tag">逻辑回归</span>
+            <span class="topic-tag">渠道匹配</span>
+            <span class="topic-tag">ROI 优化</span>
+          </div>
+          <a href="channel.html" class="card-link" style="margin-top: 20px;" data-i18n="topics.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-card-header">
+          <h3 data-i18n="topics.behavior.title">客户行为分析专题</h3>
+          <p data-i18n="topics.behavior.subtitle">六维度全景客户画像与行为洞察</p>
+        </div>
+        <div class="topic-card-body">
+          <p data-i18n="topics.behavior.desc">从消费行为、使用习惯、渠道偏好、服务感知、社会属性、价值贡献六大维度构建客户全景画像，深度洞察客户行为模式，支撑个性化产品推荐与精细化运营。</p>
+          <div class="topic-tags" data-i18n-tags="topics.behavior.tags">
+            <span class="topic-tag">六维画像</span>
+            <span class="topic-tag">行为建模</span>
+            <span class="topic-tag">个性化推荐</span>
+            <span class="topic-tag">精细化运营</span>
+          </div>
+          <a href="behavior.html" class="card-link" style="margin-top: 20px;" data-i18n="topics.learnMore">了解详情 <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<!-- ===== About / Stats ===== -->
+<section class="section section-dark" id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);" data-i18n="about.sectionTag">关于我们</span>
+      <h2 data-i18n="about.sectionTitle">深耕电信行业数据分析领域</h2>
+      <p data-i18n="about.sectionDesc">持续为运营商提供专业、可靠、高效的数据智能解决方案</p>
+    </div>
+    <div class="about-mission reveal" data-i18n-html="about.mission">
+      我们专注于<strong>电信行业数据智能</strong>，将数据仓库建设、数据集成、BI 分析、机器学习与 AI 问数有机融合，构建完整的数据价值链路。凭借丰富的电信行业语义沉淀与实践经验，帮助运营商<strong>提升决策效率、降低运营成本、实现精准营销</strong>。
+    </div>
+
+    <div class="advantages-section reveal">
+      <div class="section-header">
+        <span class="section-tag" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);" data-i18n="about.advTag">我们的优势</span>
+        <h2 data-i18n="about.advTitle">端到端全栈交付，让数据真正创造业务价值</h2>
+      </div>
+      <div class="advantages-grid">
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 data-i18n="about.adv[0].title">深耕行业</h3>
+          <p data-i18n="about.adv[0].desc">深度积累电信运营商业务模型与数据标准，开箱即用</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="about.adv[1].title">全栈能力</h3>
+          <p data-i18n="about.adv[1].desc">从数仓建设到 AI 应用，端到端覆盖数据价值链</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+              <line x1="12" y1="22.08" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <h3 data-i18n="about.adv[2].title">低门槛落地</h3>
+          <p data-i18n="about.adv[2].desc">低代码、拖拽式、自然语言交互，业务人员即可上手</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+            </svg>
+          </div>
+          <h3 data-i18n="about.adv[3].title">安全可控</h3>
+          <p data-i18n="about.adv[3].desc">全模块支持权限管控、数据水印与多租户隔离</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="about.adv[4].title">持续创新</h3>
+          <p data-i18n="about.adv[4].desc">自研核心组件，AI 能力持续融入，紧跟技术前沿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="footer-logo" data-i18n-html="footer.logo">STC 数据分析智能<span>平台</span></div>
+  <p data-i18n="footer.tagline">电信行业全链路数据智能解决方案</p>
+  <nav class="footer-links" aria-label="页脚导航">
+    <a href="#products" data-i18n="footer.products">产品矩阵</a>
+    <a href="#demo" data-i18n="footer.demo">演示视频</a>
+    <a href="#topics" data-i18n="footer.topics">行业专题</a>
+    <a href="#about" data-i18n="footer.about">关于我们</a>
+    <a href="http://192.168.193.1/portal-web/" target="_blank" rel="noopener" data-i18n="footer.trialEnv">演示环境</a>
+  </nav>
+  <hr class="footer-divider" />
+  <p data-i18n="footer.copyright">©2026 国际交付中台-工程技术部-报表团队 · 专注电信行业数据价值挖掘</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
